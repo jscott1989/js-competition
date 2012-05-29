@@ -1,5 +1,22 @@
 extends layout
 
+block scripts
+	script(src="/static/js/codemirror.js")
+	script(src="/static/js/codemirror-javascript.js")
+	script
+		var sampleCode = $('#code').text()
+		if (localStorage && 'code' in localStorage) {
+			sampleCode = localStorage['code']
+		}
+
+		var myCodeMirror = CodeMirror(function(element) {
+			textArea = $('#code')[0]
+			textArea.parentNode.replaceChild(element, textArea);
+		}, {"value": sampleCode, "lineNumbers": true});
+
+block styles
+	link(rel="stylesheet", type="text/css", href="/static/css/codemirror.css")
+
 block body
 	.container
 		.row
@@ -17,6 +34,8 @@ block body
 		.row
 			.span8
 				h2 Enter the competition
+				textarea#code
+					!{sample_code}
 			.span4
 				.scoreboard
 					h2 Leaderboard
@@ -31,3 +50,7 @@ block body
 							span Bot4
 						li
 							span Bot5
+
+				button.btn.btn-primary.btn-large
+					i.icon-play.icon-white
+					|  Test Your Entry

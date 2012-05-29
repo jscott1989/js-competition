@@ -1,23 +1,26 @@
 var express = require('express');
+var fs = require('fs');
 
-var app = express.createServer(express.logger());
+fs.readFile('config/sample_code.js', function(err,sample_code){
+	var app = express.createServer(express.logger());
 
-app.set('view options', { layout: false });
-app.use('/static', express.static(__dirname + '/static'));
+	app.set('view options', { layout: false });
+	app.use('/static', express.static(__dirname + '/static'));
 
-// var redis = require('redis-url').connect(process.env.REDISTOGO_URL);
+	// var redis = require('redis-url').connect(process.env.REDISTOGO_URL);
 
-// redis.set('foo', 'bar');
+	// redis.set('foo', 'bar');
 
-// redis.get('foo', function(err, value) {
-//   console.log('foo is: ' + value);
-// });
+	// redis.get('foo', function(err, value) {
+	//   console.log('foo is: ' + value);
+	// });
 
-app.get('/', function(request, response) {
-	response.render('index.jade', { title: 'JS Competition' });
-});
+	app.get('/', function(request, response) {
+		response.render('index.jade', { 'title': 'JS Competition', 'sample_code': sample_code });
+	});
 
-var port = process.env.PORT || 3000;
-app.listen(port, function() {
-	console.log("Listening on " + port);
+	var port = process.env.PORT || 3000;
+	app.listen(port, function() {
+		console.log("Listening on " + port);
+	});
 });
