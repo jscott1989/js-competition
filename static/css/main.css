@@ -1,8 +1,12 @@
+#instructions ol {
+	margin-top: 50px;
+}
 #instructions li {
-	font-size: 2em;
+	font-size: 1.3em;
 	line-height: 1em;
-	margin-bottom:1em;
+	margin-bottom: 1em;
 	text-align: justify;
+	font-weight: bold;
 }
 
 #editor {
@@ -20,4 +24,8 @@
 
 #games .result {
 	float: right;
+}
+
+#games, #confirm {
+	display: none;
 }

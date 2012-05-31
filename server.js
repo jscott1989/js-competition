@@ -19,6 +19,12 @@ fs.readFile('config/sample_code.js', function(err,sample_code){
 		response.render('index.jade', { 'title': 'JS Competition', 'sample_code': sample_code });
 	});
 
+	app.get('/gamerunner.js', function(request, response) {
+		fs.readFile('config/gamerunner.js', function(err,gamerunner){
+			response.render('gamerunner.js.jade', { 'gamerunner': gamerunner });
+		});
+	});
+
 	var port = process.env.PORT || 3000;
 	app.listen(port, function() {
 		console.log("Listening on " + port);
