@@ -1,0 +1,23 @@
+#instructions li {
+	font-size: 2em;
+	line-height: 1em;
+	margin-bottom:1em;
+	text-align: justify;
+}
+
+#editor {
+	background: #DDD;
+	border: 1px solid black;
+	margin-bottom: 30px;
+}
+
+#editor .controls {
+	background: #EEE;
+	text-align: right;
+	border-top: 1px solid #AAA;
+	padding: 5px;
+}
+
+#games .result {
+	float: right;
+}
