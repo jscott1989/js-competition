@@ -1,6 +1,9 @@
 var express = require('express');
 var fs = require('fs');
+require('js-yaml');
 
+var config = require('config/config.yaml')[0];
+var configJS = 'var config = ' + JSON.stringify(config) + ';';
 fs.readFile('config/sample_code.js', function(err,sample_code){
 	var app = express.createServer(express.logger());
 
@@ -17,6 +20,10 @@ fs.readFile('config/sample_code.js', function(err,sample_code){
 
 	app.get('/', function(request, response) {
 		response.render('index.jade', { 'title': 'JS Competition', 'sample_code': sample_code });
+	});
+
+	app.get('/config.js', function(request, response) {
+		response.send(configJS)
 	});
 
 	app.get('/gamerunner.js', function(request, response) {

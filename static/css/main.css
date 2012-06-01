@@ -29,3 +29,19 @@
 #games, #confirm {
 	display: none;
 }
+
+.settings .players .player {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.accordion-toggle .result {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-image: url("../img/glyphicons-halflings.png");
+	background-repeat: no-repeat;
+	background-position: -384px -144px;
+}

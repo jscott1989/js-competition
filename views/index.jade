@@ -25,11 +25,32 @@ block body
 			.accordion-heading
 				a.accordion-toggle(data-toggle="collapse",data-parent="#games .accordion",href="#game{{:game_no}}")
 					span Game {{:game_no}}
-					span.result 
-						i.icon-repeat
-			| <div id="game{{:game_no}}" class="accordion-body collapse">
-			|	<div class="accordion-inner"></div>
-			| </div>
+					span.result
+			div(id="game{{:game_no}}", class="accordion-body collapse")
+				.accordion-inner
+					.settings
+						h3 Settings
+						.players
+						ul.unstyled.controls.form-actions
+							li
+								button.btn
+									i.icon-play
+									|  Start Game
+	script#playerSettingTemplate(type="text/x-jsrender")
+		.player
+			form.form-horizontal
+				fieldset
+					legend Player {{:player_no}}
+					.control-group
+						label.control-label(for="player_{{:player_no}}_type") AI
+						.controls
+							select(id="player_{{:player_no}}_type")
+								option My AI
+								| {{if player_no == 1}}
+								option Sample AI
+								| {{else}}
+								option(selected="selected") Sample AI
+								| {{/if}}
 	.container
 		.row
 			.span12
