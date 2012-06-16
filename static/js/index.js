@@ -2,7 +2,7 @@ $(function() {
 	$('.play').click(function() {
 		$('#games').show();
 
-		start_game();
+		new_game();
 		$.scrollTo('#games', 800);
 	});
 });

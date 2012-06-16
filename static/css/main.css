@@ -45,3 +45,7 @@
 	background-repeat: no-repeat;
 	background-position: -384px -144px;
 }
+
+.in-progress .accordion-toggle .result {
+	background-position: -264px -72px;
+}

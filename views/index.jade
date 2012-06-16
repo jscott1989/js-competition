@@ -30,34 +30,34 @@ block body
 				.accordion-inner
 					.settings
 						h3 Settings
-						.players
-						ul.unstyled.controls.form-actions
-							li
-								button.btn
-									i.icon-play
-									|  Start Game
+						form.form-horizontal(method="POST",action="#")
+							.players
+							ul.unstyled.form-actions
+								li
+									button.btn
+										i.icon-play
+										|  Start Game
 	script#playerSettingTemplate(type="text/x-jsrender")
 		.player
-			form.form-horizontal
-				fieldset
-					legend Player {{:player_no}}
-					.control-group
-						label.control-label(for="player_{{:player_no}}_type") AI
-						.controls
-							select(id="player_{{:player_no}}_type")
-								option My AI
-								| {{if player_no == 1}}
-								option Sample AI
-								| {{else}}
-								option(selected="selected") Sample AI
-								| {{/if}}
+			fieldset
+				legend Player {{:player_no}}
+				.control-group
+					label.control-label(for="player_{{:player_no}}_type") AI
+					.controls
+						select(id="player_{{:player_no}}_type", name="player_{{:player_no}}_type")
+							option(value="mine") My AI
+							| {{if player_no == 1}}
+							option(value="sample") Sample AI
+							| {{else}}
+							option(value="sample", selected="selected") Sample AI
+							| {{/if}}
 	.container
 		.row
 			.span12
 				.hero-unit
 					h1 JS Competition
 					p.
-						This is a sample competition to show the JSCompetition framework. The competition is based on the AI competition hosted by Scribd in 2012.
+						This is a work in progress framework for running coding competitions. The initial version will support only Javascript but support for other languages is planned. This competition is based on on &quot;Startups of Shoreditch&quot;, the coding competition from Silicon Milkroundabout.
 
 		.row
 			.span8

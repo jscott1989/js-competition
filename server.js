@@ -4,7 +4,7 @@ require('js-yaml');
 
 var config = require('config/config.yaml')[0];
 var configJS = 'var config = ' + JSON.stringify(config) + ';';
-fs.readFile('config/sample_code.js', function(err,sample_code){
+fs.readFile('games/' + config.game_type + '/sample_code.js', function(err,sample_code){
 	var app = express.createServer(express.logger());
 
 	app.set('view options', { layout: false });
@@ -27,7 +27,7 @@ fs.readFile('config/sample_code.js', function(err,sample_code){
 	});
 
 	app.get('/gamerunner.js', function(request, response) {
-		fs.readFile('config/gamerunner.js', function(err,gamerunner){
+		fs.readFile('games/' + config.game_type + '/gamerunner.js', function(err,gamerunner){
 			response.render('gamerunner.js.jade', { 'gamerunner': gamerunner });
 		});
 	});
