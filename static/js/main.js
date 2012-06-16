@@ -63,6 +63,8 @@ $('.settings form').live('submit', function() {
 
 	settings.fadeOut(200, function() {
 		$(this).remove();
+
+		// TODO: Load settings into game
 		setup_game(game_container);
 	});
 

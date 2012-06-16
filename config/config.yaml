@@ -1,2 +1,3 @@
-game_type: startups
-players: 2
+title: Startups of Shoreditch # The title of the pages
+game_type: startups # The gametype (from the games directory)
+players: 2 # The number of players per game - TODO: Move this into the game_type
