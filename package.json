@@ -2,7 +2,7 @@
     "dependencies": {
         "express": "2.5.x",
         "redis-url": "0.1.0",
-        "jade": "",
+        "swig": "",
         "js-yaml": ""
     },
     "engines": {

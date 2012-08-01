@@ -1,3 +1,4 @@
 title: Startups of Shoreditch # The title of the pages
+theme: basic # The theme (from the themes directory)
 game_type: startups # The gametype (from the games directory)
 players: 2 # The number of players per game - TODO: Move this into the game_type
