@@ -3,6 +3,7 @@
 <head>
 	<title>{{title}}</title>
 	{% block styles %}
+	<link rel="stylesheet" type="text/css" href="/static/css/codemirror.css">
 	{% endblock %}
 </head>
 <body>
@@ -10,6 +11,11 @@
 	{% endblock %}
 
 	{% block scripts %}
+	<script src="/static/js/jquery.js"></script>
+	<script src="/static/js/knockout.js"></script>
+	<script src="/static/js/codemirror.js"></script>
+	<script src="/static/js/codemirror-javascript.js"></script>
+	<script src="/static/js/main.js"></script>
 	{% endblock scripts %}
 </body>
 </html>

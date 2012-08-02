@@ -14,8 +14,12 @@
 			<div class="span8">
 				<h2>1. Enter the competition</h2>
 				<div id="editor">
-					<textarea id="code">{{sample_code}}</textarea>
+					<textarea data-bind="value: sampleCode" id="code">{{sample_code}}</textarea>
 					<div class="controls">
+						<button class="btn btn-large competition-reset">
+							<i class="icon-remove"></i>
+							Reset to sample
+						</button>
 						<button class="btn btn-primary btn-large play">
 							<i class="icon-play icon-white"></i>
 							Test Your Entry
