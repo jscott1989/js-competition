@@ -6,9 +6,6 @@ require('js-yaml'); // YAML for config files
 // Read the config
 var config = require(__dirname + '/config/config.yaml')[0];
 
-// A string to load the config in the client
-var configJS = 'var config = ' + JSON.stringify(config) + ';';
-
 // Set up the server
 var app = express.createServer(express.logger());
 
@@ -33,9 +30,11 @@ app.get('/', function(request, response) {
 	});
 });
 
-// Just pass the config
-app.get('/config.js', function(request, response) {
-	response.send(configJS)
+app.get('/js/viewmodel.js', function(request, response) {
+	fs.readFile('static/js/viewmodel.js', 'ascii', function(err,viewmodel){
+		var compiled = swig.compile(viewmodel, { filename: 'viewmodel' })({"config": config});
+		response.send(compiled);
+	});
 });
 
 // Pass the custom gamerunner

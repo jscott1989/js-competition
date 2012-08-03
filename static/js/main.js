@@ -1,26 +1,28 @@
 var originalSampleCode = $('#code').text();
 
 // Set up a viewModel for storing the sample code
-var viewModel = new (function() {
-	var self = this;
-
-	if (localStorage && 'code' in localStorage) {
-		self.sampleCode = ko.observable(localStorage['code'])
-	} else {
-		self.sampleCode = ko.observable(originalSampleCode);
-	}
-})();
+if (localStorage && 'code' in localStorage) {
+	viewModel.sampleCode = ko.observable(localStorage['code'])
+} else {
+	viewModel.sampleCode = ko.observable(originalSampleCode);
+}
 
 // Record the changes into localstorage
 viewModel.sampleCode.subscribe(function(newValue) {
 	if (localStorage) {
 		localStorage['code'] = newValue;
 	}
-		if (codeMirror.getValue() != newValue) {
-			// Manually bind codeMirror
-			codeMirror.setValue(newValue)
-		}
-	});
+	if (codeMirror.getValue() != newValue) {
+		// Manually bind codeMirror
+		codeMirror.setValue(newValue)
+	}
+});
+
+
+
+// The number of games on the page
+viewModel.games = ko.observable(0);
+
 
 ko.applyBindings(viewModel)
 
@@ -34,9 +36,12 @@ function codeChanged(change) {
 
 var codeMirror = CodeMirror.fromTextArea($('#code')[0], {"lineNumbers": true, "onChange": codeChanged});
 
-
 // Basic controls
 $('.competition-reset').live('click', function() {
-	console.log("A");
 	viewModel.sampleCode(originalSampleCode);
-})
+});
+
+// Start a new game
+$('.competition-play').live('click', function() {
+	play();
+});
