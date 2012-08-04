@@ -3,7 +3,9 @@
         "express": "2.5.x",
         "redis-url": "0.1.0",
         "swig": "",
-        "js-yaml": ""
+        "js-yaml": "",
+        "less": "",
+        "walk": ""
     },
     "engines": {
         "node": "0.6.x"

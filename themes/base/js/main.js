@@ -21,10 +21,10 @@ viewModel.sampleCode.subscribe(function(newValue) {
 
 
 // The number of games on the page
-viewModel.games = ko.observable(0);
+viewModel.game = ko.observable(null);
 
 
-ko.applyBindings(viewModel)
+viewModelLoaded();
 
 
 // Set up codemirror
@@ -42,6 +42,6 @@ $('.competition-reset').live('click', function() {
 });
 
 // Start a new game
-$('.competition-play').live('click', function() {
-	play();
+$('.competition-new-game').live('click', function() {
+	newGame();
 });

@@ -1,5 +1,10 @@
 {% extends 'basic/layout.html' %}
 
+{% block templates %}
+	{% parent %}
+	{% include "basic/game.html" %}
+{% endblock %}
+
 {% block body %}
 	<div class="container">
 		<div class="row">
@@ -20,7 +25,7 @@
 							<i class="icon-remove"></i>
 							Reset to sample
 						</button>
-						<button class="btn btn-primary btn-large play">
+						<button class="btn btn-primary btn-large competition-new-game">
 							<i class="icon-play icon-white"></i>
 							Test Your Entry
 						</button>
@@ -33,7 +38,7 @@
 					<li>Modify the sample AI on the left to create an entry.</li>
 					<li>
 						Press 
-						<button class="btn btn-primary btn-small play">
+						<button class="btn btn-primary btn-small competition-new-game">
 							<i class="icon-play icon-white"></i>
 							Test Your Entry
 						</button>
@@ -43,9 +48,10 @@
 				</ol>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" data-bind="visible: game">
 			<div class="span12">
-				<h2>Games</h2>
+				<h2>Game</h2>
+				<div data-bind="template: {'name': 'game'}">
 			</div>
 		</div>
 	</div>

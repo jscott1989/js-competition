@@ -5,4 +5,6 @@ var viewModel = new (function() {
 	{% endfor %}
 });
 
-ko.applyBindings(viewModel)
+function viewModelLoaded() {
+	ko.applyBindings(viewModel)
+}
