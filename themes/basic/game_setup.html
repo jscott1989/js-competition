@@ -10,7 +10,7 @@
 	<div data-bind="template: { name: 'game_setup_player', foreach: players }"></div>
 
 	<div>
-		<form class="well" style="float: left;">
+		<form class="well" style="float: left; width: 150px;">
 			<button class="btn competition-add-player" data-bind="enable: players().length < max_players()">
 				<i class="icon-plus-sign"></i>
 				Add Player
@@ -18,6 +18,10 @@
 			<button class="btn competition-remove-player" data-bind="enable: players().length > min_players()">
 				<i class="icon-minus-sign"></i>
 				Remove Player
+			</button>
+			<button class="btn competition-start-game">
+				<i class="icon-ok"></i>
+				Start Game
 			</button>
 		</form>
 	</div>

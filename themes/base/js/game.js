@@ -4,9 +4,7 @@ var PLAYING_STATE = "playing";
 var nextPlayerID = 1;
 
 function newGame() {
-	viewModel.game({
-		"state": SETTINGS_STATE
-	});
+	viewModel.game.state(SETTINGS_STATE);
 
 	viewModel.players.removeAll();
 	nextPlayerID = 1;
@@ -23,4 +21,8 @@ function addPlayer() {
 function removePlayer() {
 	viewModel.players.pop();
 	nextPlayerID--;
+}
+
+function startGame() {
+	viewModel.game.state(PLAYING_STATE);
 }

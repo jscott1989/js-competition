@@ -21,7 +21,9 @@ viewModel.sampleCode.subscribe(function(newValue) {
 
 
 // The number of games on the page
-viewModel.game = ko.observable(null);
+viewModel.game = {
+	state: ko.observable(null)
+}
 
 
 viewModelLoaded();
@@ -57,5 +59,11 @@ $('.competition-add-player').live('click', function() {
 // Remove a player
 $('.competition-remove-player').live('click', function() {
 	removePlayer();
+	return false;
+});
+
+// Start game
+$('.competition-start-game').live('click', function() {
+	startGame();
 	return false;
 });
