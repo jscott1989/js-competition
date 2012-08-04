@@ -39,9 +39,23 @@ var codeMirror = CodeMirror.fromTextArea($('#code')[0], {"lineNumbers": true, "o
 // Basic controls
 $('.competition-reset').live('click', function() {
 	viewModel.sampleCode(originalSampleCode);
+	return false;
 });
 
 // Start a new game
 $('.competition-new-game').live('click', function() {
 	newGame();
+	return false;
+});
+
+// Add a player
+$('.competition-add-player').live('click', function() {
+	addPlayer();
+	return false;
+});
+
+// Remove a player
+$('.competition-remove-player').live('click', function() {
+	removePlayer();
+	return false;
 });

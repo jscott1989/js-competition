@@ -1,34 +1,24 @@
+<script type="text/html" id="game_setup_player">
+	<form class="well" style="float: left;">
+		<strong>Player <span data-bind="text: id"></span></strong>
+		<label>AI</label>
+		<select name="ai_type" data-bind="options: $parent.ais, optionsText: 'name', value: ai"></select>
+	</form>
+</script>
+
 <script type="text/html" id="game_setup">
-	<form class="well" style="float: left;">
-		<strong>Player <span>1</span></strong>
-		<label>AI</label>
-		<select>
-			<option>My AI</option>
-			<option>SampleAI</option>
-		</select>
-	</form>
-	<form class="well" style="float: left;">
-		<strong>Player <span>2</span></strong>
-		<label>AI</label>
-		<select>
-			<option>My AI</option>
-			<option>SampleAI</option>
-		</select>
-	</form>
-	<form class="well" style="float: left;">
-		<strong>Player <span>3</span></strong>
-		<label>AI</label>
-		<select>
-			<option>My AI</option>
-			<option>SampleAI</option>
-		</select>
-	</form>
-	<form class="well" style="float: left;">
-		<strong>Player <span>4</span></strong>
-		<label>AI</label>
-		<select>
-			<option>My AI</option>
-			<option>SampleAI</option>
-		</select>
-	</form>
+	<div data-bind="template: { name: 'game_setup_player', foreach: players }"></div>
+
+	<div>
+		<form class="well" style="float: left;">
+			<button class="btn competition-add-player">
+				<i class="icon-plus-sign"></i>
+				Add Player
+			</button>
+			<button class="btn competition-remove-player">
+				<i class="icon-minus-sign"></i>
+				Remove Player
+			</button>
+		</form>
+	</div>
 </script>
