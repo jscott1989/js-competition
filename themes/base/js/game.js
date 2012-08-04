@@ -11,7 +11,9 @@ function newGame() {
 	viewModel.players.removeAll();
 	nextPlayerID = 1;
 
-	addPlayer();
+	for (var i = 0; i < viewModel.default_players(); i++) {
+		addPlayer();
+	}
 }
 
 function addPlayer() {

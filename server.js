@@ -7,6 +7,9 @@ require('js-yaml'); // YAML for config files
 
 // Read the config
 var config = require(__dirname + '/config/config.yaml')[0];
+var game_config = require(__dirname + '/games/' + config.game_type + '/config.yaml')[0];
+
+for (var attrname in game_config) { config[attrname] = game_config[attrname]; }
 
 // Set up the server
 var app = express.createServer(express.logger());

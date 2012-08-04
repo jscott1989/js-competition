@@ -11,11 +11,11 @@
 
 	<div>
 		<form class="well" style="float: left;">
-			<button class="btn competition-add-player">
+			<button class="btn competition-add-player" data-bind="enable: players().length < max_players()">
 				<i class="icon-plus-sign"></i>
 				Add Player
 			</button>
-			<button class="btn competition-remove-player">
+			<button class="btn competition-remove-player" data-bind="enable: players().length > min_players()">
 				<i class="icon-minus-sign"></i>
 				Remove Player
 			</button>
