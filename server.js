@@ -62,11 +62,17 @@ app.get('/js/:filename.js', function(request, response) {
 			filepath = __dirname + "/themes/" + config.theme + "/js/" + filename + ".js";
 		}
 
-		fs.readFile(filepath, 'utf8', function(err,js){
-			if (filename == 'viewmodel') {
-				js = swig.compile(js, { filename: filename })({"config": config});
+		fs.exists(filepath, function(exists) {
+			if (!exists) {
+				filepath = __dirname + "/games/" + config.game_type + "/" + filename + ".js";
 			}
-			response.send(js);
+
+			fs.readFile(filepath, 'utf8', function(err,js){
+				if (filename == 'viewmodel') {
+					js = swig.compile(js, { filename: filename })({"config": config});
+				}
+				response.send(js);
+			});
 		});
 	});
 });

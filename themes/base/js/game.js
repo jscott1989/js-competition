@@ -15,7 +15,7 @@ function newGame() {
 }
 
 function addPlayer() {
-	viewModel.players.push({"id": nextPlayerID++, "ai": (nextPlayerID ==2) ? viewModel.ais()[0] : viewModel.ais()[1]});
+	viewModel.players.push(new Player(nextPlayerID++,(nextPlayerID ==2) ? viewModel.ais()[0] : viewModel.ais()[1]));
 }
 
 function removePlayer() {

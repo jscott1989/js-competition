@@ -30,6 +30,12 @@ function codeChanged(change) {
 
 var codeMirror = CodeMirror.fromTextArea($('#code')[0], {"lineNumbers": true, "onChange": codeChanged});
 
+
+// Initialise the gamerunner
+if ('initViewModel' in gamerunner) {
+	gamerunner.initViewModel();
+}
+
 // Basic controls
 $('.competition-reset').live('click', function() {
 	viewModel.sampleCode(originalSampleCode);
