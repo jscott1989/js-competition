@@ -25,4 +25,13 @@ function removePlayer() {
 
 function startGame() {
 	viewModel.game.state(PLAYING_STATE);
+	viewModel.game.isPaused(false);
+}
+
+function pauseResumeGame() {
+	viewModel.game.isPaused(!viewModel.game.isPaused());
+}
+
+function endGame() {
+	viewModel.game.state(null);
 }

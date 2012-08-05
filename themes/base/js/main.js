@@ -18,14 +18,6 @@ viewModel.sampleCode.subscribe(function(newValue) {
 	}
 });
 
-
-
-// The number of games on the page
-viewModel.game = {
-	state: ko.observable(null)
-}
-
-
 viewModelLoaded();
 
 
@@ -65,5 +57,17 @@ $('.competition-remove-player').live('click', function() {
 // Start game
 $('.competition-start-game').live('click', function() {
 	startGame();
+	return false;
+});
+
+// Pause/Resume game
+$('.competition-pause-resume-game').live('click', function() {
+	pauseResumeGame();
+	return false;
+});
+
+// End game
+$('.competition-end-game').live('click', function() {
+	endGame();
 	return false;
 });

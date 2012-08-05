@@ -37,6 +37,13 @@ less_parser.parse('@import "base_main.less"; @import "main.less";', function(e, 
 	compiled_css = tree.toCSS();
 });
 
+// Compile the game_type templates together
+fs.readFile('games/' + config.game_type + '/game_extra.html', function(err,game_extra){
+	fs.readFile('games/' + config.game_type + '/game_main.html', function(err,game_main){
+		swig.compile(game_main + ' ' + game_extra, {filename: 'game_views.html'});
+	});
+});
+
 // Requesting the homepage
 app.get('/', function(request, response) {
 	// Read the sample code (TODO: Read this on startup, cache)
@@ -45,6 +52,7 @@ app.get('/', function(request, response) {
 	});
 });
 
+// JS Files
 app.get('/js/:filename.js', function(request, response) {
 	response.header('Content-Type', 'application/javascript');
 	var filename = request.route.params.filename;
@@ -63,6 +71,7 @@ app.get('/js/:filename.js', function(request, response) {
 	});
 });
 
+// Single compiled CSS
 app.get('/css/style.css', function(request, response) {
 	response.header('Content-Type', 'text/css');
 	response.send(compiled_css);

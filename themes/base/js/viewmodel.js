@@ -10,6 +10,12 @@ var viewModel = new (function() {
 		{"id": "my_ai", "name": "My AI"},
 		{"id": "sample_ai", "name": "Sample AI"}
 	]);
+
+
+	self.game = {
+		state: ko.observable(null),
+		isPaused: ko.observable(false)
+	}
 })();
 
 function viewModelLoaded() {
