@@ -1,3 +1,6 @@
 min_players: 2
 max_players: 6
 default_players: 2
+
+control_type: turn-based
+turn_order: forward-back

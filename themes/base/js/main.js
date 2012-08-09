@@ -20,7 +20,6 @@ viewModel.sampleCode.subscribe(function(newValue) {
 
 viewModelLoaded();
 
-
 // Set up codemirror
 
 // Bindings don't work so well with codeMirror so we have to do this
@@ -32,6 +31,9 @@ var codeMirror = CodeMirror.fromTextArea($('#code')[0], {"lineNumbers": true, "o
 
 
 // Initialise the gamerunner
+if ('initViewModel' in base_gamerunner) {
+	base_gamerunner.initViewModel();
+}
 if ('initViewModel' in gamerunner) {
 	gamerunner.initViewModel();
 }
