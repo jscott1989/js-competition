@@ -57,7 +57,6 @@ app.get(/^\/js\/(.*)\.js/, function(request, response) {
 	response.header('Content-Type', 'application/javascript');
 	var filename = request.params[0];
 	var filepath = __dirname + "/themes/base/js/" + filename + ".js";
-	console.log(filepath);
 	fs.exists(filepath, function(exists) {
 		if (!exists) {
 			filepath = __dirname + "/themes/" + config.theme + "/js/" + filename + ".js";

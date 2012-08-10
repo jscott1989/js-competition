@@ -12,7 +12,7 @@ var base_gamerunner = {
 	},
 
 	start: function() {
-		viewModel.game.current_player(viewModel.players()[0])
+		viewModel.game.current_player(viewModel.players()[0]);
 		gamerunner.next_turn(viewModel.game.current_player());
 	}
 };

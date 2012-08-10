@@ -1,10 +1,3 @@
-function Player(id, ai) {
-	this.id = id;
-	this.ai = ai;
-
-	this.score = ko.observable(0);
-}
-
 var gamerunner = {
 	initViewModel: function() {
 		// If possible, games should use the viewModel.game to store game data - this is so it can then be bound on the interface
@@ -14,7 +7,7 @@ var gamerunner = {
 			var players = viewModel.players().slice(0);
 
 			players.sort(function(p1, p2) {
-				return p2.score() - p1.score()
+				return p2.score() - p1.score();
 			});
 
 			return players;
@@ -22,11 +15,6 @@ var gamerunner = {
 	},
 
 	next_turn: function(player) {
-		// var player_model = {
-
-		// }
-
-		// player.code.call('take_turn', player_model);
-		// TODO: Make this work
+		message(player, 'take_turn');
 	}
-}
+};
