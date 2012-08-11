@@ -1,7 +1,0 @@
-{% include "basic/game_setup.html" %}
-{% include "basic/game_play.html" %}
-
-<script type="text/html" id="game">
-	<div data-bind="template: {name: 'game_setup'}, visible: game.state() == 'settings'"></div>
-	<div data-bind="template: {name: 'game_play'}, visible: game.state() != 'settings'"></div>
-</script>
