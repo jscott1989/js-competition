@@ -15,7 +15,7 @@ var viewModel = new (function() {
 	self.game = {
 		state: ko.observable(null),
 		isPaused: ko.observable(false)
-	}
+	};
 })();
 
 function viewModelLoaded() {

@@ -9,6 +9,19 @@ var base_gamerunner = {
 		});
 
 		viewModel.game.current_player = ko.observable(0);
+
+		viewModel.game.isFinished = ko.computed(function() {
+			if (viewModel.game.turn() >= viewModel.max_turns()) {
+				return true;
+			}
+
+			for(var i = 0; i < viewModel.players().length; i++) {
+				if (viewModel.players()[i].score() >= viewModel.max_score()) {
+					return true;
+				}
+			}
+			return false;
+		});
 	},
 
 	start: function() {
@@ -17,6 +30,7 @@ var base_gamerunner = {
 	},
 
 	next_turn: function() {
+		console.log('next turn');
 		gamerunner.next_turn(viewModel.players()[viewModel.game.current_player()]);
 
 		viewModel.game.current_player(viewModel.game.current_player() + 1);
@@ -25,8 +39,11 @@ var base_gamerunner = {
 			viewModel.game.current_player(0);
 		}
 
-		if (viewModel.game.turn() < 100) {
-			setTimeout(base_gamerunner.next_turn, 500);
+		if (viewModel.game.isFinished()) {
+			// The game is over
+			alert('FINSIHED');
+		} else {
+			setTimeout(base_gamerunner.next_turn, 200);
 		}
 	}
 };

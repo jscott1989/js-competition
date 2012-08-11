@@ -14,7 +14,15 @@ var gamerunner = {
 		});
 	},
 
+	start: function() {
+
+	},
+
 	next_turn: function(player) {
-		message(player, 'take_turn');
+		var guess = player.code.take_turn();
+		console.log("guessed ", guess);
+		if (guess == 7) {
+			player.score(player.score() + 1);
+		}
 	}
 };

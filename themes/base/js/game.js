@@ -61,11 +61,3 @@ function getCode(ai_name) {
 	}
 	return new Entry();
 }
-
-/**
- * This is used to abstract away function calls
- * This is to allow flexibility for adding different languages in future
- */
-function message(target, subject, args) {
-	target.code[subject].apply(null, args);
-}

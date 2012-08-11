@@ -4,3 +4,5 @@ default_players: 2
 
 control_type: turn-based
 turn_order: forward-back
+max_score: 1
+max_turns: 100

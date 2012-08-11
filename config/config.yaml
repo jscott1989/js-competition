@@ -1,6 +1,6 @@
 title: Startups of Shoreditch # The title of the pages
 theme: basic # The theme (from the themes directory)
-game_type: startups # The gametype (from the games directory)
+game_type: guessing # The gametype (from the games directory)
 
 header: "JS Competition"
 description: "This is a test of an in-progress JS competition engine. The goal is that people can enter with no setup. There is even a basic code editor on this very page so you can begin work on your entry immediately."
