@@ -61,3 +61,7 @@ function getCode(ai_name) {
 	}
 	return new Entry();
 }
+
+function addEvent(text) {
+	viewModel.game.events.push({"text": text});
+}

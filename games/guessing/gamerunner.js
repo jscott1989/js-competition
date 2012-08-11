@@ -18,11 +18,12 @@ var gamerunner = {
 
 	start: function() {
 		viewModel.game.randomNumber(Math.floor(Math.random()*10)+1);
+		addEvent("Number is " + viewModel.game.randomNumber());
 	},
 
 	next_turn: function(player) {
 		var guess = player.code.take_turn();
-		console.log("guessed ", guess);
+		addEvent(player.id + " guessed " + guess);
 		if (guess == viewModel.game.randomNumber()) {
 			player.score(player.score() + 1);
 		}

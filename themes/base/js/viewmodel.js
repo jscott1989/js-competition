@@ -14,7 +14,8 @@ var viewModel = new (function() {
 
 	self.game = {
 		state: ko.observable(null),
-		isPaused: ko.observable(false)
+		isPaused: ko.observable(false),
+		events: ko.observableArray()
 	};
 })();
 
