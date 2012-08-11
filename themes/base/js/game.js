@@ -28,7 +28,7 @@ function startGame() {
 		var player = viewModel.players()[i];
 		player.code = getCode(player.ai.id);
 	}
-
+	
 	viewModel.game.state(PLAYING_STATE);
 	viewModel.game.isPaused(false);
 }

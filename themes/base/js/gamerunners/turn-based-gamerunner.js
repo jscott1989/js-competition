@@ -25,6 +25,7 @@ var base_gamerunner = {
 	},
 
 	start: function() {
+		gamerunner.start();
 		viewModel.game.current_player(0);
 		base_gamerunner.next_turn();
 	},

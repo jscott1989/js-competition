@@ -12,16 +12,18 @@ var gamerunner = {
 
 			return players;
 		});
+
+		viewModel.game.randomNumber = ko.observable(0);
 	},
 
 	start: function() {
-
+		viewModel.game.randomNumber(Math.floor(Math.random()*10)+1);
 	},
 
 	next_turn: function(player) {
 		var guess = player.code.take_turn();
 		console.log("guessed ", guess);
-		if (guess == 7) {
+		if (guess == viewModel.game.randomNumber()) {
 			player.score(player.score() + 1);
 		}
 	}
