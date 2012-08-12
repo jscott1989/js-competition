@@ -1,10 +1,10 @@
 # Codefeud
 
 ## About
-Codefeud is a system for running Javascript coding competitions. It comes with several gametypes built in and it is easy to add your own. Codefeud is very early in development and should not be considered production ready.
+Codefeud is a system for running Javascript coding competitions. It comes with several games built in and it is easy to add your own. Codefeud is very early in development and should not be considered production ready.
 
 ## Usage
-Configure the competition in config.yaml, selecting a theme from the built in themes (listed below), and gametype from the build in gametypes (listed below). To run locally, ensure the dependencies are installed (`npm install`) and run app.js (`node app.js`).
+Configure the competition in config.yaml, selecting a theme from the built in themes (listed below), and game from the build in games (listed below). To run locally, ensure the dependencies are installed (`npm install`) and run app.js (`node app.js`).
 
 ### Deploying to Heroku
 TODO
@@ -15,7 +15,7 @@ TODO
 ## Configuration
 TODO
 
-## Built in gametypes
+## Built in games
 <table>
 	<thead>
 		<tr>
@@ -51,7 +51,7 @@ TODO
 	</body>
 </table>
 
-## Creating a gametype
+## Creating a game
 TODO
 
 ## Creating a theme

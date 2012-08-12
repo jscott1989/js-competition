@@ -18,31 +18,14 @@
  */
 
 /**
- * This is the entry point to Codefeud coding competition runner
- *
- * Run it with node app.js
+ * Basic page routes (index, rules, participants, etc.)
  */
 
-var express = require('express');
-var app = module.exports = express.createServer();
-
-require('./app/config/environment.js')(app, express);
-
-var render = require('./app/rendering.js')('./templates',
-																						'./themes/basic/templates',
-																						'./games/guess/templates');
-
-// Include basic pages
-require('./app/routes/pages.js')(app, render);
-// CSS
-require('./app/routes/css.js')(app);
-
-function startServer(port) {
-	app.listen(port);
-}
-
-if (require.main === module) {
-	// Start the server automatically if this is run directly
-	var port = process.env.PORT || 3000;
-	startServer(port);
-}
+module.exports = function(app, render) {
+	/**
+	 * Index page
+	 */
+	app.get('/', function(req, res) {
+		res.send(render('index.html'));
+	});
+};

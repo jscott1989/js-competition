@@ -18,14 +18,19 @@
  */
 
 /**
- * Basic page routes (index, rules, participants, etc.)
- */
+	* CSS route (we only need one, compiled LESS into a single CSS)
+	*/
 
 module.exports = function(app) {
-	/**
-	 * Index page
-	 */
-	app.get('/', function(req, res) {
-		res.send('Hello world !');
+	var less = require('less');
+	var less_parser = new(less.Parser)({paths: ['./']});
+
+	var compiled_css = '';
+	less_parser.parse('@import "less/main.less";', function(e, tree) {
+		compiled_css = tree.toCSS();
+	});
+
+	app.get('/style.css', function(req, res) {
+		res.send(compiled_css);
 	});
 };

@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<title>{{config.title}}</title>
+	{% block styles %}
+		<link rel="stylesheet" type="text/css" href="/style.css">
+	{% endblock %}
+</head>
+<body>
+	{% block templates %}
+	{% endblock %}
+	
+	{% block body %}
+	{% endblock %}
+
+	{% block scripts %}
+	<!--<script src="/js/jquery.js"></script>
+	<script src="/js/knockout.js"></script>
+	<script src="/js/codemirror.js"></script>
+	<script src="/js/codemirror-javascript.js"></script>
+	<script src="/js/viewmodel.js"></script>
+	<script src="/js/gamerunner.js"></script>
+	<script src="/js/gamerunners/{{config.control_type}}-gamerunner.js">
+	</script>
+	<script src="/js/main.js"></script>
+	<script src="/js/game.js"></script>-->
+	{% endblock scripts %}
+</body>
+</html>
