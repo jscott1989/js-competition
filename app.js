@@ -40,10 +40,20 @@ var render = require('./app/rendering.js')('./templates',
 // Include basic pages
 require('./app/routes/pages.js')(app, render);
 // CSS
-require('./app/routes/css.js')(app);
+require('./app/routes/css.js')(app, 'less',
+																						'themes/' + config.theme +
+                                                            '/less',
+																						'games/' + config.game +
+                                                            '/less');
 // JS
 require('./app/routes/js.js')(app, './js', './themes/' + config.theme + '/js',
                                               './games' + config.game + '/js');
+// Static
+require('./app/routes/static.js')(app, 'static',
+                                            'themes/' + config.theme +
+                                                            '/static',
+                                            'games/' + config.game +
+                                                            '/static');
 
 function startServer(port) {
 	app.listen(port);

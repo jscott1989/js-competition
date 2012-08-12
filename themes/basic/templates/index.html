@@ -1,5 +1,53 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<p>This is the index...</p>
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div class="hero-unit">
+					<h1 data-bind="text: header"></h1>
+					<p data-bind="text: description"></p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span8">
+				<h2>Enter the competition</h2>
+				<div id="editor">
+					<textarea data-bind="value: sampleCode" id="code">{{sample_code}}</textarea>
+					<div class="controls">
+						<button class="btn btn-large competition-reset">
+							<i class="icon-remove"></i>
+							Reset to sample
+						</button>
+						<button class="btn btn-primary btn-large competition-new-game">
+							<i class="icon-play icon-white"></i>
+							Test Your Entry
+						</button>
+					</div>
+				</div>
+			</div>
+			<div id="instructions" class="span4">
+				<h2>Instructions</h2>
+				<ol>
+					<li>Modify the sample AI on the left to create an entry.</li>
+					<li>
+						Press 
+						<button class="btn btn-primary btn-small competition-new-game">
+							<i class="icon-play icon-white"></i>
+							Test Your Entry
+						</button>
+						to see how it performs.
+					</li>
+					<li>If you're happy with it, submit it to the live competition. Otherwise, keep iterating step 1 &amp; 2 until you're ready.</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row" data-bind="visible: game.state">
+			<div class="span12">
+				<h2>Game</h2>
+				<div data-bind="template: {'name': 'game'}">
+			</div>
+		</div>
+	</div>
 {% endblock %}

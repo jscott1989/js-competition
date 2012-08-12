@@ -18,23 +18,14 @@
  */
 
 /**
-	* CSS route (we only need one, compiled LESS into a single CSS)
+	* Static routes
 	*/
 
-module.exports = function(app, lessDirectory, themeLessDirectory,
-															gameLessDirectory) {
-	var less = require('less');
-	var less_parser = new(less.Parser)({paths: ['./']});
-  
-	var compiled_css = '';
-	less_parser.parse('@import "' + lessDirectory + '/style.less"; @import "' +
-						themeLessDirectory + '/style.less"; @import "' + gameLessDirectory +
-                                                        '/style.less";', function(e, tree) {
-		compiled_css = tree.toCSS();
-	});
+var express = require('express');
 
-	app.get('/style.css', function(req, response) {
-		response.header('Content-Type', 'text/css');
-		response.send(compiled_css);
-	});
+module.exports = function(app, staticDirectory, themeStaticDirectory,
+															gameStaticDirectory) {
+  app.use(express.static(staticDirectory));
+  app.use(express.static(themeStaticDirectory));
+  app.use(express.static(gameStaticDirectory));
 };
