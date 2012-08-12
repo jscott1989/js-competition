@@ -25,17 +25,25 @@
 
 var express = require('express');
 var app = module.exports = express.createServer();
+require('js-yaml'); // YAML for config files
+
+var config = require(__dirname + '/config.yaml');
 
 require('./app/config/environment.js')(app, express);
 
 var render = require('./app/rendering.js')('./templates',
-																						'./themes/basic/templates',
-																						'./games/guess/templates');
+																						'./themes/' + config.theme +
+                                                            '/templates',
+																						'./games/' + config.game +
+                                                            '/templates');
 
 // Include basic pages
 require('./app/routes/pages.js')(app, render);
 // CSS
 require('./app/routes/css.js')(app);
+// JS
+require('./app/routes/js.js')(app, './js', './themes/' + config.theme + '/js',
+                                              './games' + config.game + '/js');
 
 function startServer(port) {
 	app.listen(port);
