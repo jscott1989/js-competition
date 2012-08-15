@@ -21,8 +21,11 @@
 	* CSS route (we only need one, compiled LESS into a single CSS)
 	*/
 
-module.exports = function(app, lessDirectory, themeLessDirectory,
-															gameLessDirectory) {
+module.exports = function(app, config) {
+	var lessDirectory = 'less';
+	var themeLessDirectory = 'themes/' + config.base.theme + '/less';
+	var gameLessDirectory = 'games/' + config.base.game + '/less';
+
 	var less = require('less');
 	var less_parser = new(less.Parser)({paths: ['./']});
   

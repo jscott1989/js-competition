@@ -18,17 +18,17 @@
  */
 
 /**
-	* Static routes
-	*/
+ * This contains functionality relating to the view model (named v)
+ */
 
-var express = require('express');
+// Object which will contains data
+v = {}
 
-module.exports = function(app, config) {
-  var staticDirectory = 'static';
-  var themeStaticDirectory = 'themes/' + config.base.theme + '/static';
-  var gameStaticDirectory = 'games/' + config.base.game + '/static';
-  
-  app.use(express.static(staticDirectory));
-  app.use(express.static(themeStaticDirectory));
-  app.use(express.static(gameStaticDirectory));
-};
+// Configuration
+
+	// Game Configuration
+
+	// Theme Configuration
+
+	// Base Configuration
+

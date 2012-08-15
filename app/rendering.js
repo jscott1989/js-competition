@@ -27,8 +27,10 @@ var swig = require('swig');
 var fs = require('fs');
 var _ = require('underscore');
 
-module.exports = function(templateDirectory, themeTemplateDirectory,
-                                                        gameTemplateDirectory){
+module.exports = function(config){
+  var templateDirectory = '../templates'
+  var themeTemplateDirectory = '../themes/' + config.base.theme + '/templates'
+  var gameTemplateDirectory = '../games/' + config.base.game + '/templates'
 
   swig.init({
       allowErrors: false,

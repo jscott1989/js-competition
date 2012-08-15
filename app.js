@@ -25,35 +25,21 @@
 
 var express = require('express');
 var app = module.exports = express.createServer();
-require('js-yaml'); // YAML for config files
 
-var config = require(__dirname + '/config.yaml');
+var config = require('./app/config.js')();
 
 require('./app/config/environment.js')(app, express);
 
-var render = require('./app/rendering.js')('./templates',
-																						'./themes/' + config.theme +
-                                                            '/templates',
-																						'./games/' + config.game +
-                                                            '/templates');
+var render = require('./app/rendering.js')(config);
 
 // Include basic pages
-require('./app/routes/pages.js')(app, render);
+require('./app/routes/pages.js')(app, config, render);
 // CSS
-require('./app/routes/css.js')(app, 'less',
-																						'themes/' + config.theme +
-                                                            '/less',
-																						'games/' + config.game +
-                                                            '/less');
+require('./app/routes/css.js')(app, config);
 // JS
-require('./app/routes/js.js')(app, './js', './themes/' + config.theme + '/js',
-                                              './games' + config.game + '/js');
+require('./app/routes/js.js')(app, config);
 // Static
-require('./app/routes/static.js')(app, 'static',
-                                            'themes/' + config.theme +
-                                                            '/static',
-                                            'games/' + config.game +
-                                                            '/static');
+require('./app/routes/static.js')(app, config);
 
 function startServer(port) {
 	app.listen(port);

@@ -24,11 +24,14 @@
 var _ = require('underscore');
 var fs = require('fs');
 
-module.exports = function(app, javascriptDirectory, themeJavascriptDirectory,
-																											gameJavascriptDirectory) {
+module.exports = function(app, config) {
+
+  var javascriptDirectory = './js';
+  var themeJavascriptDirectory = './themes/' + config.base.theme + '/js';
+  var gameJavascriptDirectory = './games' + config.base.game + '/js';
 
 	var directories = [javascriptDirectory, themeJavascriptDirectory, 
-																											gameJavascriptDirectory];
+                                                  gameJavascriptDirectory];
 
 	app.get(/^\/js\/(.*)\.js/, function(request, response) {
 		var filename = request.params[0];

@@ -18,17 +18,13 @@
  */
 
 /**
-	* Static routes
-	*/
+ * This contains functionality relating to the code editor
+ * currently it uses CodeMirror
+ */
 
-var express = require('express');
+// Record sample code passed from config
+var sampleCode = $('#code').text();
 
-module.exports = function(app, config) {
-  var staticDirectory = 'static';
-  var themeStaticDirectory = 'themes/' + config.base.theme + '/static';
-  var gameStaticDirectory = 'games/' + config.base.game + '/static';
-  
-  app.use(express.static(staticDirectory));
-  app.use(express.static(themeStaticDirectory));
-  app.use(express.static(gameStaticDirectory));
-};
+var codeMirror = CodeMirror.fromTextArea($('#code')[0], {"lineNumbers": true, "onChange": function codeChanged(change) {
+	// viewModel.sampleCode(change.getValue());
+}});

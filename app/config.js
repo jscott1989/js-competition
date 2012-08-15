@@ -18,17 +18,15 @@
  */
 
 /**
-	* Static routes
-	*/
+ * Load configuration files
+ */
 
-var express = require('express');
+var fs = require('fs');
+require('js-yaml'); // YAML for config files
 
-module.exports = function(app, config) {
-  var staticDirectory = 'static';
-  var themeStaticDirectory = 'themes/' + config.base.theme + '/static';
-  var gameStaticDirectory = 'games/' + config.base.game + '/static';
-  
-  app.use(express.static(staticDirectory));
-  app.use(express.static(themeStaticDirectory));
-  app.use(express.static(gameStaticDirectory));
+module.exports = function(){
+  var base = require(__dirname + '/../config.yaml');
+  var game = require(__dirname + '/../games/' + base.game + '/config.yaml');
+  var theme = require(__dirname + '/../themes/' + base.theme + '/config.yaml');
+  return {'base': base, 'game': game, 'theme': theme};
 };
