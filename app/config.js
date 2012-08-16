@@ -28,5 +28,14 @@ module.exports = function(){
   var base = require(__dirname + '/../config.yaml');
   var game = require(__dirname + '/../games/' + base.game + '/config.yaml');
   var theme = require(__dirname + '/../themes/' + base.theme + '/config.yaml');
+  if (!base) {
+  	base = {};
+  }
+  if (!game) {
+  	game = {};
+  }
+  if (!theme) {
+  	theme = {};
+  }
   return {'base': base, 'game': game, 'theme': theme};
 };

@@ -142,6 +142,7 @@ module.exports = function(config){
   var default_variables = {};
   default_variables['sample_code'] = fs.readFileSync('games/' +
                                       config.base.game + '/js/sample_code.js');
+  default_variables['config'] = config;
 
   return function(template, variables) {
     var vars = _.extend({}, default_variables, variables);

@@ -25,7 +25,22 @@
 v = {};
 
 // Configuration
-v.config = {};
-{% for config_type in config %}
-	v.config['{{config_type}}'] = {};
-{% endfor %}
+v.config = {
+	'base': {
+		{% for c in config.base %}
+		'{{loop.key}}': ko.observable('{{c}}'){% if not loop.last %},{% endif %}
+		{% endfor %}
+	},
+	'theme': {
+		{% for c in config.theme %}
+		'{{loop.key}}': ko.observable('{{c}}'){% if not loop.last %},{% endif %}
+		{% endfor %}
+	},
+	'game': {
+		{% for c in config.game %}
+		'{{loop.key}}': ko.observable('{{c}}'){% if not loop.last %},{% endif %}
+		{% endfor %}
+	}
+}
+
+ko.applyBindings(v);
