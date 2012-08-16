@@ -26,5 +26,24 @@
 var sampleCode = $('#code').text();
 
 var codeMirror = CodeMirror.fromTextArea($('#code')[0], {"lineNumbers": true, "onChange": function codeChanged(change) {
-	// viewModel.sampleCode(change.getValue());
+	v.code(change.getValue());
 }});
+
+if (localStorage && 'code' in localStorage) {
+	v.code = ko.observable(localStorage['code'])
+} else {
+	v.code = ko.observable(sampleCode);
+}
+codeMirror.setValue(v.code());
+
+// Record the changes into localstorage
+v.code.subscribe(function(newValue) {
+	if (localStorage) {
+		localStorage['code'] = newValue;
+	}
+	if (codeMirror.getValue() != newValue) {
+		// Manually bind codeMirror
+		codeMirror.setValue(newValue)
+	}
+});
+

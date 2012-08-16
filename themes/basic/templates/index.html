@@ -14,7 +14,7 @@
 			<div class="span8">
 				<h2>Enter the competition</h2>
 				<div id="editor">
-					<textarea data-binda="value: sampleCode" id="code">{{sample_code}}</textarea>
+					<textarea data-bind="value: code" id="code">{{sample_code}}</textarea>
 					<div class="controls">
 						<button class="btn btn-large competition-reset">
 							<i class="icon-remove"></i>
@@ -43,10 +43,10 @@
 				</ol>
 			</div>
 		</div>
-		<div class="row" data-bind="visible: game.state">
+		<div class="row" data-bindd="visible: game.state">
 			<div class="span12">
 				<h2>Game</h2>
-				<div data-bind="template: {'name': 'game'}">
+				<div data-bindd="template: {'name': 'game'}">
 			</div>
 		</div>
 	</div>

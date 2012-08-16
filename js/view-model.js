@@ -42,5 +42,3 @@ v.config = {
 		{% endfor %}
 	}
 }
-
-ko.applyBindings(v);
