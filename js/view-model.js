@@ -22,13 +22,10 @@
  */
 
 // Object which will contains data
-v = {}
+v = {};
 
 // Configuration
-
-	// Game Configuration
-
-	// Theme Configuration
-
-	// Base Configuration
-
+v.config = {};
+{% for config_type in config %}
+	v.config['{{config_type}}'] = {};
+{% endfor %}

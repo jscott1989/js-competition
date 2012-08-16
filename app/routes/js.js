@@ -24,31 +24,10 @@
 var _ = require('underscore');
 var fs = require('fs');
 
-module.exports = function(app, config) {
-
-  var javascriptDirectory = './js';
-  var themeJavascriptDirectory = './themes/' + config.base.theme + '/js';
-  var gameJavascriptDirectory = './games' + config.base.game + '/js';
-
-	var directories = [javascriptDirectory, themeJavascriptDirectory, 
-                                                  gameJavascriptDirectory];
-
+module.exports = function(app, config, render) {
 	app.get(/^\/js\/(.*)\.js/, function(request, response) {
 		var filename = request.params[0];
 		response.header('Content-Type', 'application/javascript');
-
-		// This returns the filepath + name of a matching .js file from the selected
-		// game and theme (or base), if it doesn't exist - returns undefined
-		var file = _.chain(directories).map(function(directory) {
-			return directory + '/' + filename + '.js';
-		}).filter(function(file) {
-			return fs.existsSync(file);
-		}).first().value();
-
-		if (!file) {
-			response.status(404).send('Not found');
-			return;
-		}
-		response.send(fs.readFileSync(file, "utf8"));
+		response.send(render('js/' + filename + '.js'));
 	});
 };

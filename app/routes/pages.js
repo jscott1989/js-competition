@@ -21,20 +21,12 @@
 
 /**
  * Basic page routes (index, rules, participants, etc.)
- *
- * config is an object with "game", "theme", and "base" keys
  */
 module.exports = function(app, config, render) {
-
-	// The contain variables sent to all templates
-	default_variables = {};
-
-	default_variables['sample_code'] = fs.readFileSync('games/' + config.base.game + '/js/sample_code.js');
-
 	/**
 	 * Index page
 	 */
-	app.get('/', function(req, res) {
-		res.send(render('index.html', default_variables));
+	app.get('/', function(request, response) {
+		response.send(render('index.html'));
 	});
 };

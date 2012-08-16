@@ -26,12 +26,11 @@
 var swig = require('swig');
 var fs = require('fs');
 var _ = require('underscore');
+var walk = require('walk');
 
 module.exports = function(config){
-  var templateDirectory = '../templates'
-  var themeTemplateDirectory = '../themes/' + config.base.theme + '/templates'
-  var gameTemplateDirectory = '../games/' + config.base.game + '/templates'
 
+  // Initialise swig
   swig.init({
       allowErrors: false,
       autoescape: true,
@@ -44,22 +43,112 @@ module.exports = function(config){
       tzOffset: 0
   });
 
-  //  This is a mapping between the "virtual" location and the real location
-  var compiledFiles = {
-    "base/layout.html" : "templates/layout.html",
-    "layout.html" : "themes/basic/templates/layout.html",
-    "index.html" : "themes/basic/templates/index.html"
-  };
 
-  _.each(compiledFiles, function(filePath, key) {
-    var content = fs.readFileSync(filePath, "utf8");
-    compiledFiles[key] = swig.compile(content, { filename: key });
-  });
+  var themeTemplateDirectory = 'themes/' + config.base.theme + '/templates'
+  var gameTemplateDirectory = 'games/' + config.base.game + '/templates'
+  var gameJSDirectory = 'games/' + config.base.game + '/js'
+  var themeJSDirectory = 'themes/' + config.base.theme + '/js'
+  // This maps directories to virtual prefixes
+  var templateDirectories = [];
+  templateDirectories.push(['templates/', 'base']);
+  templateDirectories.push([themeTemplateDirectory]);
+  templateDirectories.push([gameTemplateDirectory]);
+  templateDirectories.push(['js/', 'js']);
+  templateDirectories.push([themeJSDirectory, 'js']);
+  templateDirectories.push([gameJSDirectory, 'js']);
+
+  //  This is a mapping between the 'virtual' location and the real location
+  var compiledFiles = {};
+
+  // Recursively move through each templateDirectory converting it into the 
+  // compiledFiles object
+  function parseTemplateDirectory(parsingFinished) {
+    var map = templateDirectories.shift();
+    if (map) {
+      directory = map[0];
+      prefix = map[1] || '';
+
+      // Turn the templateDirectories + prefixes into a virtual dir structure
+      var walker = walk.walkSync(__dirname + '/../' + directory, {
+        followLinks: false,
+      });
+
+      walker.on("file", function (root, fileStats, next) {
+        var content = fs.readFileSync(root + '/' + fileStats.name, 'utf8');
+
+        var dependencies = [];
+
+        var extends_match = content.match(/{% extends "(.+?)" %}/g);
+        if (extends_match) {
+          _.each(extends_match, function(match) {
+            dependencies.push(match.match(/"(.+)"/)[1]);
+          });
+        }
+
+        var include_match = content.match(/{% include "(.+?)" %}/g);
+        if (include_match) {
+          _.each(include_match, function(match) {
+            dependencies.push(match.match(/"(.+)"/)[1]);
+          });
+        }
+
+        var newPrefix = prefix + root.substring(__dirname.length +
+                                                          directory.length + 4);
+
+        if (!(newPrefix === '')) {
+          newPrefix += '/';
+        }
+
+        compiledFiles[newPrefix + fileStats.name] = [content, dependencies];
+      });
+
+      walker.on("end", function () {
+        parseTemplateDirectory(parsingFinished);
+      });
+    } else {
+      parsingFinished();
+    }
+  }
+
+  // Order everything so dependencies are compiled in the correct order
+  function getCompileOrder(unordered) {
+    function calculateWeight(key) {
+      return 1 + _.reduce(unordered[key][1], function(memo, key) {
+        return memo + calculateWeight(key);
+      }, 0);
+    }
+
+    function addWeight(key) {
+      return {"key": key, "weight": calculateWeight(key)};
+    }
+
+    return _.chain(unordered).keys()
+                              .map(addWeight)
+                              .sortBy('weight')
+                              .pluck('key')
+                              .value()
+  }
+
+  function parsingFinished() {
+    var compileOrder = getCompileOrder(compiledFiles);
+    _.each(compileOrder, function(key) {
+      compiledFiles[key] = swig.compile(compiledFiles[key][0], { filename: key });
+    });
+  }
+
+  parseTemplateDirectory(parsingFinished);
+
+  // The variables sent to all templates
+  var default_variables = {};
+  default_variables['sample_code'] = fs.readFileSync('games/' +
+                                      config.base.game + '/js/sample_code.js');
 
   return function(template, variables) {
+    var vars = _.extend({}, default_variables, variables);
+
     /**
      * Render a template
      */
-     return compiledFiles[template](variables);
+     return compiledFiles[template](vars);
   };
 };

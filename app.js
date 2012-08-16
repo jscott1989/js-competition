@@ -37,7 +37,7 @@ require('./app/routes/pages.js')(app, config, render);
 // CSS
 require('./app/routes/css.js')(app, config);
 // JS
-require('./app/routes/js.js')(app, config);
+require('./app/routes/js.js')(app, config, render);
 // Static
 require('./app/routes/static.js')(app, config);
 
