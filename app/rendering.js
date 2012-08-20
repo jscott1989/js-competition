@@ -54,6 +54,7 @@ module.exports = function(config){
   var templateDirectories = [];
   templateDirectories.push(['templates/', 'base']);
   templateDirectories.push([gameTypeTemplateDirectory, 'game_type']);
+  templateDirectories.push(['components/', 'components']);
   templateDirectories.push([themeTemplateDirectory]);
   templateDirectories.push([gameTemplateDirectory]);
   templateDirectories.push(['js/', 'js']);
@@ -133,6 +134,7 @@ module.exports = function(config){
   }
 
   function parsingFinished() {
+    console.log(_.keys(compiledFiles));
     var compileOrder = getCompileOrder(compiledFiles);
     _.each(compileOrder, function(key) {
       compiledFiles[key] = swig.compile(compiledFiles[key][0], { filename: key });

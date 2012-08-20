@@ -25,9 +25,9 @@ var _ = require('underscore');
 var fs = require('fs');
 
 module.exports = function(app, config, render) {
-	app.get(/^\/js\/(.*)\.js/, function(request, response) {
+	app.get(/^\/(.*)\.js/, function(request, response) {
 		var filename = request.params[0];
 		response.header('Content-Type', 'application/javascript');
-		response.send(render('js/' + filename + '.js'));
+		response.send(render(filename + '.js'));
 	});
 };

@@ -29,6 +29,10 @@
 	<script src="/js/editor.js"></script>
 	<script src="/js/ui.js"></script>
 	<script src="/js/game.js"></script>
+
+	{% for component in config.game.components %}
+		<script src="/components/{{ component }}.js"></script>
+	{% endfor %}
 	<script>ko.applyBindings(v);</script>
 
 	<!--
