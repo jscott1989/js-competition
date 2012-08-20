@@ -16,3 +16,6 @@ var scorable = {
 		player.score = ko.observable(0);
 	}
 };
+
+playerModifiers.push(scorable.initPlayer);
+scorable.initViewModel();

@@ -44,22 +44,24 @@ module.exports = function(config){
   });
 
 
-  var themeTemplateDirectory = 'themes/' + config.base.theme + '/templates'
-  var gameTemplateDirectory = 'games/' + config.base.game + '/templates'
-  var gameJSDirectory = 'games/' + config.base.game + '/js'
-  var themeJSDirectory = 'themes/' + config.base.theme + '/js'
-  var gameTypeTemplateDirectory = 'game_types/' + config.game.game_type + '/templates'
+  var themeTemplateDirectory = 'themes/' + config.base.theme + '/templates';
+  var gameTemplateDirectory = 'games/' + config.base.game + '/templates';
+  var gameJSDirectory = 'games/' + config.base.game + '/js';
+  var themeJSDirectory = 'themes/' + config.base.theme + '/js';
 
   // This maps directories to virtual prefixes
   var templateDirectories = [];
   templateDirectories.push(['templates/', 'base']);
-  templateDirectories.push([gameTypeTemplateDirectory, 'game_type']);
-  templateDirectories.push(['components/', 'components']);
   templateDirectories.push([themeTemplateDirectory]);
   templateDirectories.push([gameTemplateDirectory]);
   templateDirectories.push(['js/', 'js']);
   templateDirectories.push([themeJSDirectory, 'js']);
   templateDirectories.push([gameJSDirectory, 'js']);
+
+  _.each(config.game.components, function(component) {
+    templateDirectories.push(['components/' + component + '/templates/', 'components/' + component]);
+    templateDirectories.push(['components/' + component + '/js/', 'components/' + component + '/js'])
+  });
 
   //  This is a mapping between the 'virtual' location and the real location
   var compiledFiles = {};
@@ -133,7 +135,23 @@ module.exports = function(config){
                               .value()
   }
 
+  /**
+   * Generate the components.html template to be included
+   */
+  function addComponents() {
+    var dependencies = _.map(config.game.components, function(dependency) {
+      return 'components/' + dependency + '/index.html';
+    });
+
+    var components = _.reduce(dependencies, function(memo, key) {
+      return memo + '{% include "' + key + '" %}'
+    }, '');
+
+    compiledFiles['components.html'] = [components,dependencies];
+  }
+
   function parsingFinished() {
+    addComponents();
     var compileOrder = getCompileOrder(compiledFiles);
     _.each(compileOrder, function(key) {
       compiledFiles[key] = swig.compile(compiledFiles[key][0], { filename: key });

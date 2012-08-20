@@ -12,8 +12,6 @@
 		
 		{% include "game_main.html" %}
 		{% include "game_extra.html" %}
-
-		{% include "game_type/index.html" %}
 	{% endblock %}
 	
 	{% block body %}
@@ -30,16 +28,15 @@
 	<script src="/js/ui.js"></script>
 	<script src="/js/game.js"></script>
 
-	{% for component in config.game.components %}
-		<script src="/components/{{ component }}.js"></script>
-		<script>
-			{{component}}.initViewModel();
+	{% include "components.html" %}
 
-			if ('initPlayer' in {{component}}) {
-				playerModifiers.push({{component}}.initPlayer);
+	<script>
+		v.game.state.subscribe(function(newValue) {
+			if (newValue == "playing") {
+				baseGameRunner.start();
 			}
-		</script>
-	{% endfor %}
+		});
+	</script>
 	<script>ko.applyBindings(v);</script>
 
 	<!--
