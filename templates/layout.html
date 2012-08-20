@@ -8,6 +8,12 @@
 </head>
 <body>
 	{% block templates %}
+		{% include "game.html" %}
+		
+		{% include "game_main.html" %}
+		{% include "game_extra.html" %}
+
+		{% include "game_type/index.html" %}
 	{% endblock %}
 	
 	{% block body %}

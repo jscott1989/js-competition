@@ -1,0 +1,19 @@
+<script type="text/html" id="game_play">
+	<div class="row">
+		<div class="span10">
+			<div data-bind="template: {name: 'game_main'}"></div>
+		</div>
+		<div class="span2">
+			<button class="btn competition-pause-resume-game">
+				<i data-bind="css: {'icon-play': game.isPaused(), 'icon-pause': !game.isPaused()}"></i>
+				<span data-bind="text: game.isPaused() ? 'Resume' : 'Pause'"></span>
+			</button>
+			<button class="btn competition-end-game">
+				<i class="icon-remove"></i>
+				End
+			</button>
+
+			<div data-bind="template: {name: 'game_extra'}"></div>
+		</div>
+	</div>
+</script>

@@ -48,9 +48,12 @@ module.exports = function(config){
   var gameTemplateDirectory = 'games/' + config.base.game + '/templates'
   var gameJSDirectory = 'games/' + config.base.game + '/js'
   var themeJSDirectory = 'themes/' + config.base.theme + '/js'
+  var gameTypeTemplateDirectory = 'game_types/' + config.game.game_type + '/templates'
+
   // This maps directories to virtual prefixes
   var templateDirectories = [];
   templateDirectories.push(['templates/', 'base']);
+  templateDirectories.push([gameTypeTemplateDirectory, 'game_type']);
   templateDirectories.push([themeTemplateDirectory]);
   templateDirectories.push([gameTemplateDirectory]);
   templateDirectories.push(['js/', 'js']);

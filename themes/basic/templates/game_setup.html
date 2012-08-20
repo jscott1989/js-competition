@@ -1,0 +1,28 @@
+<script type="text/html" id="game_setup_player">
+	<form class="well" style="float: left;">
+		<strong>Player <span data-bind="text: id"></span></strong>
+		<label>AI</label>
+		<select name="ai_type" data-bind="options: $parent.ais, optionsText: 'name', value: ai"></select>
+	</form>
+</script>
+
+<script type="text/html" id="game_setup">
+	<div data-bind="template: { name: 'game_setup_player', foreach: game.players }"></div>
+
+	<div>
+		<form class="well" style="float: left; width: 150px;">
+			<button class="btn competition-add-player" data-bind="enable: game.players().length < config.game.max_players()">
+				<i class="icon-plus-sign"></i>
+				Add Player
+			</button>
+			<button class="btn competition-remove-player" data-bind="enable: game.players().length > config.game.min_players()">
+				<i class="icon-minus-sign"></i>
+				Remove Player
+			</button>
+			<button class="btn competition-start-game">
+				<i class="icon-ok"></i>
+				Start Game
+			</button>
+		</form>
+	</div>
+</script>

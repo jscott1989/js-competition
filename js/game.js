@@ -21,3 +21,86 @@
  * This contains core game functionality - delegating much of the work to the
  * game specific gamerunner
  */
+
+function Player(id, ai) {
+  this.id = id;
+  this.ai = ai;
+  
+  this.score = ko.observable(0);
+}
+
+// AIs which can play in a game
+v.ais = ko.observableArray([
+  {id: "my_ai", name: "My AI"},
+  {id: "sample_ai", name: "Sample AI"}
+]);
+
+v.game = {
+  state: ko.observable(null),
+  players: ko.observableArray(),
+  isPaused: ko.observable(false)
+};
+
+// TODO: Pull the score + orderedPlayers out into a plugin of some sort (scoreable)
+v.game.orderedPlayers = ko.computed(function() {
+  // Copy players - so we don't sort the original list
+  var players = v.game.players().slice(0);
+
+  players.sort(function(p1, p2) {
+    return p2.score() - p1.score();
+  });
+
+  return players;
+});
+
+var nextPlayerID = 1;
+
+/**
+ * Add a player to the game
+ */
+function addPlayer() {
+  v.game.players.push(new Player(nextPlayerID++,(nextPlayerID == 2) ? v.ais()[0] : v.ais()[1]));
+}
+
+/**
+ * Remove the last added player from the game
+ */
+function removePlayer() {
+  v.game.players.pop();
+  nextPlayerID--;
+}
+
+/**
+ * Start a new game
+ */
+function newGame() {
+  v.game.state('settings');
+
+  v.game.players.removeAll();
+  nextPlayerID = 1;
+
+  for (var i = 0; i < v.config.game.default_players(); i++) {
+  	addPlayer();
+  }
+}
+
+/**
+ * Start the game playing
+ */
+function startGame() {
+  // for (var i = 0; i < viewModel.players().length; i++) {
+  //   var player = viewModel.players()[i];
+  //   player.code = getCode(player.ai.id);
+  // }
+  
+  v.game.state('playing');
+  v.game.isPaused(false);
+}
+
+function pauseResumeGame() {
+  v.game.isPaused(!viewModel.game.isPaused());
+}
+
+function endGame() {
+  v.game.state(null);
+}
