@@ -10,7 +10,7 @@ var gamerunner = {
 		addEvent("Number is " + viewModel.game.randomNumber());
 	},
 
-	next_turn: function(player) {
+	nextTurn: function(player) {
 		var guess = player.code.take_turn();
 		addEvent(player.id + " guessed " + guess);
 		if (guess == viewModel.game.randomNumber()) {

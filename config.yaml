@@ -1,5 +1,6 @@
 game: guess
 theme: basic
 
+title: Demo
 header: CodeFeud
 description: This is just a test instance of the CodeFeud coding competition runner. Edit the configuration, games, and themes, and run your own competition.

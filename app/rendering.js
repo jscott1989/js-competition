@@ -134,7 +134,6 @@ module.exports = function(config){
   }
 
   function parsingFinished() {
-    console.log(_.keys(compiledFiles));
     var compileOrder = getCompileOrder(compiledFiles);
     _.each(compileOrder, function(key) {
       compiledFiles[key] = swig.compile(compiledFiles[key][0], { filename: key });

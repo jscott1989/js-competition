@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>{{config.title}}</title>
+	<title>{{config.base.title}} powered by CodeFeud</title>
 	{% block styles %}
 		<link rel="stylesheet" type="text/css" href="/style.css">
 	{% endblock %}
@@ -32,6 +32,13 @@
 
 	{% for component in config.game.components %}
 		<script src="/components/{{ component }}.js"></script>
+		<script>
+			{{component}}.initViewModel();
+
+			if ('initPlayer' in {{component}}) {
+				playerModifiers.push({{component}}.initPlayer);
+			}
+		</script>
 	{% endfor %}
 	<script>ko.applyBindings(v);</script>
 
