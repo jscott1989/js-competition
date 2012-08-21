@@ -18,11 +18,13 @@
 	{% endblock %}
 
 	{% block scripts %}
+	<script src="/js/lib/eventemitter2.js"></script>
 	<script src="/js/lib/jquery.js"></script>
 	<script src="/js/lib/underscore.js"></script>
 	<script src="/js/lib/codemirror.js"></script>
 	<script src="/js/lib/knockout.js"></script>
 
+	<script src="/js/events.js"></script>
 	<script src="/js/view-model.js"></script>
 	<script src="/js/editor.js"></script>
 	<script src="/js/ui.js"></script>
@@ -31,9 +33,10 @@
 	{% include "components.html" %}
 
 	<script>
+		events.emit("initViewModel", v);
 		v.game.state.subscribe(function(newValue) {
 			if (newValue == "playing") {
-				baseGameRunner.start();
+				events.emit("_start", v);
 			}
 		});
 	</script>

@@ -56,3 +56,36 @@ TODO
 
 ## Creating a theme
 TODO
+
+## Events
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Arguments</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>initViewModel</td>
+			<td>viewModel</td>
+			<td>Use this to modify the viewModel for a new component</td>
+		</tr>
+		<tr>
+			<td>initPlayer</td>
+			<td>Player</td>
+			<td>Use this to modify the Player for a new component</td>
+		</tr>
+		<tr>
+			<td>start</td>
+			<td>viewModel</td>
+			<td>A game is about to start</td>
+		</tr>
+		<tr>
+			<td>_start</td>
+			<td>viewModel</td>
+			<td>Don’t use this unless you’re working on the base gamerunner (turn-based).</td>
+		</tr>
+	</body>
+</table>

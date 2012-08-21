@@ -27,9 +27,6 @@ function Player(id, ai) {
   this.ai = ai;
 }
 
-// This contains functions which modify a Player on load
-var playerModifiers = [];
-
 // AIs which can play in a game
 v.ais = ko.observableArray([
   {id: "my_ai", name: "My AI"},
@@ -50,9 +47,7 @@ var nextPlayerID = 1;
 function addPlayer() {
   player = new Player(nextPlayerID++,(nextPlayerID == 2) ? v.ais()[0] : v.ais()[1]);
 
-  _.each(playerModifiers, function(modify) {
-    modify(player);
-  });
+  events.emit("initPlayer", player);
   v.game.players.push(player);
 }
 
