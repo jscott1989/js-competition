@@ -6,3 +6,4 @@ components:
     - turn_based
     - text_based
     - scorable
+    - javascript
