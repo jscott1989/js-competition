@@ -18,14 +18,14 @@
   });
 
   function next_turn() {
-      // console.log('next turn');
-      // gamerunner.next_turn(viewModel.players()[viewModel.game.current_player()]);
+      console.log('next turn');
+      events.emit("next_turn", v.game.players()[v.game.currentPlayer()])
 
-      // viewModel.game.current_player(viewModel.game.current_player() + 1);
-      // if (viewModel.game.current_player() >= viewModel.players().length) {
-      //   viewModel.game.turn(viewModel.game.turn()+1);
-      //   viewModel.game.current_player(0);
-      // }
+      v.game.currentPlayer(v.game.currentPlayer() + 1);
+      if (v.game.currentPlayer() >= v.game.players().length) {
+        v.game.turn(v.game.turn() + 1);
+        v.game.currentPlayer(0);
+      }
 
       // if (viewModel.game.isFinished()) {
       //   // The game is over
@@ -36,9 +36,8 @@
     }
 
   events.on("_start", function(v) {
-    console.log(v);
     events.emit("start", v);
     v.game.currentPlayer(0);
-    next_turn();
+    next_turn(v);
   });
 })();

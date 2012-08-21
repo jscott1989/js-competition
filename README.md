@@ -83,6 +83,16 @@ TODO
 			<td>A game is about to start</td>
 		</tr>
 		<tr>
+			<td>next_turn</td>
+			<td>Player</td>
+			<td>It’s _Player_’s turn.</td>
+		</tr>
+			<tr>
+			<td>log</td>
+			<td>message</td>
+			<td>In a text_based game, use this to emit to the log</td>
+		</tr>
+		<tr>
 			<td>_start</td>
 			<td>viewModel</td>
 			<td>Don’t use this unless you’re working on the base gamerunner (turn-based).</td>
