@@ -29,8 +29,8 @@ function Player(id, ai) {
 
 // AIs which can play in a game
 v.ais = ko.observableArray([
-  {id: "my_ai", name: "My AI"},
-  {id: "sample_ai", name: "Sample AI"}
+  {id: "my_ai", name: "My AI", "language": "js"},
+  {id: "sample_ai", name: "Sample AI", "language": "js"}
 ]);
 
 v.game = {

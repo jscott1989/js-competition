@@ -16,25 +16,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- 
-(function() {
-	events.on("initViewModel", function(v) {
-		v.game.randomNumber = ko.observable(0);
-	});
 
-	events.on("start", function(v) {
-		v.game.randomNumber(Math.floor(Math.random()*10)+1);
-		events.emit("log", "Number is " + v.game.randomNumber());
-	});
+ /**
+  * This file contains code which ties together the different allowed languages
+  */
 
-	events.on("next_turn", function(player) {
-		// Once magic methods are available ideally I'd like this to be player.take_turn()
-		// for now, this is probably the best we can do to keep it language agnostic
-		var guess = player.ai.callFunction("take_turn");
-
-		events.emit("log", player.id + " guessed " + guess);
-		// if (guess == v.game.randomNumber()) {
-		// 	player.score(player.score() + 1);
-		// }
-	});
-})();
+/**
+ * Call a function on a player
+ */
+function callFunction(player, function) {
+	
+}

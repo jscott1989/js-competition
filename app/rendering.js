@@ -55,6 +55,7 @@ module.exports = function(config){
   templateDirectories.push([themeTemplateDirectory]);
   templateDirectories.push([gameTemplateDirectory]);
   templateDirectories.push(['js/', 'js']);
+  templateDirectories.push(['languages/', 'languages']);
   templateDirectories.push([themeJSDirectory, 'js']);
   templateDirectories.push([gameJSDirectory, 'js']);
 
@@ -150,11 +151,38 @@ module.exports = function(config){
     compiledFiles['components.html'] = [components,dependencies];
   }
 
+  /**
+   * Generate the languages.js file to be included
+   */
+  function addLanguages(callback) {
+    var dependencies = [];
+
+    var walker = walk.walkSync(__dirname + '/../languages', {
+      followLinks: false,
+    });
+
+    walker.on("file", function (root, fileStats, next) {
+      dependencies.push('languages/' + fileStats.name);
+    });
+
+    walker.on("end", function() {
+      var languages = _.reduce(dependencies, function(memo, key) {
+      return memo + '{% include "' + key + '" %}'
+    }, '');
+
+      compiledFiles['languages.js'] = [languages, dependencies];
+
+      callback();
+    });
+  }
+
   function parsingFinished() {
     addComponents();
-    var compileOrder = getCompileOrder(compiledFiles);
-    _.each(compileOrder, function(key) {
-      compiledFiles[key] = swig.compile(compiledFiles[key][0], { filename: key });
+    addLanguages(function() {
+      var compileOrder = getCompileOrder(compiledFiles);
+      _.each(compileOrder, function(key) {
+        compiledFiles[key] = swig.compile(compiledFiles[key][0], { filename: key });
+      });
     });
   }
 

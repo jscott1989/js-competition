@@ -18,12 +18,44 @@
  */
 
 (function() {
-  events.on('initPlayer', function(player) {
-    player.code = {
-      take_turn: function() {
-        // TODO: Make this stuff.. work
-        return 2;
-      }
-    }
+
+  /**
+   * Basic execution environment for Javascript
+   * NOTE that this is not an actual sandbox and offers no security
+   * (though it will at some point in the future)
+   */
+  function JavascriptSandbox() {
+    this.iframe = $('<iframe class="sandbox"></iframe>');
+    this.iframe.appendTo('body')
+  }
+
+  JavascriptSandbox.prototype.eval = function(code) {
+    this.iframe.contents().find('body').append($('<script>' + code + '</script>'))
+  }
+
+	function callFunction(f) {
+    var c = 'parent.callFunctionReturn = ' + f + '();';
+    this.sandbox.eval(c);
+    return callFunctionReturn;
+  }
+
+  events.on('initViewModel', function(v) {
+    _.each(v.ais(), function(ai) {
+    	if (ai.language == "js") {
+    		ai.callFunction = callFunction;
+    	}	
+    })
+  });
+
+  events.on('_start', function(v) {
+    _.each(v.game.players(), function(player) {
+      if (player.ai.language == "js") {
+        player.ai = _.extend({}, player.ai);
+        // Pull the code into the player
+        player.ai.player = player;
+        player.ai.sandbox = new JavascriptSandbox();
+        player.ai.sandbox.eval(v.code());
+      } 
+    })
   });
 })();
