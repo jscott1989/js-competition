@@ -28,13 +28,14 @@
 	});
 
 	events.on("next_turn", function(player) {
+		console.log(player);
 		// Once magic methods are available ideally I'd like this to be player.take_turn()
 		// for now, this is probably the best we can do to keep it language agnostic
-		var guess = player.ai.callFunction("take_turn");
+		var guess = player.ai().callFunction("take_turn");
 
 		events.emit("log", player.id + " guessed " + guess);
-		// if (guess == v.game.randomNumber()) {
-		// 	player.score(player.score() + 1);
-		// }
+		if (guess == v.game.randomNumber()) {
+			player.score(player.score() + 1);
+		}
 	});
 })();

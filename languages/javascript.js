@@ -49,13 +49,14 @@
 
   events.on('_start', function(v) {
     _.each(v.game.players(), function(player) {
-      if (player.ai.language == "js") {
-        player.ai = _.extend({}, player.ai);
+      if (player.base_ai().language == "js") {
+        player.woo = "AAA";
+        player.ai(_.extend({}, player.base_ai()));
         // Pull the code into the player
-        player.ai.player = player;
-        player.ai.sandbox = new JavascriptSandbox();
-        player.ai.sandbox.eval(v.code());
-      } 
+        player.ai().player = player;
+        player.ai().sandbox = new JavascriptSandbox();
+        player.ai().sandbox.eval(v.code());
+      }
     })
   });
 })();

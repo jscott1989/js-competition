@@ -37,7 +37,6 @@
   });
 
   function next_turn() {
-      console.log('next turn');
       events.emit("next_turn", v.game.players()[v.game.currentPlayer()])
 
       v.game.currentPlayer(v.game.currentPlayer() + 1);
@@ -50,7 +49,7 @@
       //   // The game is over
       //   alert('FINSIHED');
       // } else {
-      //   setTimeout(base_gamerunner.next_turn, 200);
+      setTimeout(next_turn, 200);
       // }
     }
 

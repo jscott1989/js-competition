@@ -24,7 +24,9 @@
 
 function Player(id, ai) {
   this.id = id;
-  this.ai = ai;
+  this.base_ai = ko.observable(ai);
+  this.ai = ko.observable(null);
+  console.log("setting");
 }
 
 // AIs which can play in a game
