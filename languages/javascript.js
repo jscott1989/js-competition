@@ -16,21 +16,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 (function() {
-
+  var i = 0;
   /**
    * Basic execution environment for Javascript
    * NOTE that this is not an actual sandbox and offers no security
    * (though it will at some point in the future)
    */
   function JavascriptSandbox() {
+    this.lol = i++;
     this.iframe = $('<iframe class="sandbox"></iframe>');
-    this.iframe.appendTo('body')
+    this.iframe.appendTo('body');
+    this.iframe = this.iframe[0]
   }
 
   JavascriptSandbox.prototype.eval = function(code) {
-    this.iframe.contents().find('body').append($('<script>' + code + '</script>'))
+    this.iframe.contentWindow.document.write('<script>' + code + '</script>')
   }
 
 	function callFunction(f) {
@@ -50,12 +51,18 @@
   events.on('_start', function(v) {
     _.each(v.game.players(), function(player) {
       if (player.base_ai().language == "js") {
-        player.woo = "AAA";
         player.ai(_.extend({}, player.base_ai()));
         // Pull the code into the player
         player.ai().player = player;
         player.ai().sandbox = new JavascriptSandbox();
-        player.ai().sandbox.eval(v.code());
+
+        if (player.base_ai().id =='my_ai') {
+          console.log(player.ai().sandbox.lol, v.code());
+          player.ai().sandbox.eval(v.code());
+        } else if (player.base_ai().id =='sample_ai') {
+          console.log(player.ai().sandbox.lol, sampleCode);
+          player.ai().sandbox.eval(sampleCode);
+        }
       }
     })
   });
